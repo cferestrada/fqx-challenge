@@ -1,6 +1,7 @@
+// Example of a simple type
 export type Todo = {
-  id: string;
+  userId: string;
+  id: number;
   title: string;
-  description: string,
-  tags: string[],
+  completed: boolean;
 };
