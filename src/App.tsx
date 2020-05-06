@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { __COLORS } from "./layout/Theme";
 import MyImage, { AssetType } from "./views/Figure";
 import MainRouter from "./routes/MainRouter";
-import { BounceIn } from "./layout/UI/Animations/BounceIn";
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 const Container = styled.div`
   display: flex;
@@ -26,15 +28,22 @@ const Logo = styled(MyImage)`
 
 const App: React.FC = () => {
   return (
-    <Container>
-      <Header>
-        <Logo
-          source={"https://files.axelra.com/logo.png"}
-          assetType={AssetType.URL}
-        />
-      </Header>
-      <MainRouter />
-    </Container>
+    <ThemeProvider theme={theme}>
+      <Container>
+        <Header>
+          <Logo
+            source={"https://files.axelra.com/logo.png"}
+            assetType={AssetType.URL}
+          />
+        </Header>
+        <MainRouter />
+      </Container>
+      <Footer>
+        <Authored>
+          <a target="_blank" href="https://github.com/cferestrada/fqx-challenge"> <GitHubIcon /> </a>
+        </Authored>
+      </Footer>
+    </ThemeProvider>
   );
 };
 
