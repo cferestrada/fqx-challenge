@@ -51,5 +51,8 @@
   },
   "devDependencies": {
     "@types/react-beautiful-dnd": "^12.1.2"
+  },
+  "resolutions": {
+    "babel-jest": "24.7.1"
   }
 }
