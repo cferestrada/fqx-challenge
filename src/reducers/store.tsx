@@ -1,21 +1,22 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { ListsState } from "./lists/types";
-import listsReducer from "./lists/reducer";
+import { TodoState } from "./todos/types";
+import todoReducer from "./todos/reducer";
 
 export type RootState = {
-  lists: ListsState;
+  todos: TodoState;
 };
 
 const rootReducer = combineReducers({
-  lists: listsReducer,
+  todos: todoReducer()
 });
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(
     applyMiddleware(thunk)
+    // other store enhancers if any
   )
 );
 

@@ -1,29 +1,36 @@
-import { ActionTypes } from "./types";
+import { ThunkDispatch } from "redux-thunk";
+import { ActionTypes, ErrorTodos, FetchedTodos, LoadingTodos } from "./types";
+import { getDomain } from "../../helpers/Domain";
+import { HTTP_OPTIONS, PROTOCOL_METHOD } from "../../helpers/FetchOptions";
+import { Todo } from "../../model/Todo";
 
-export const addTodo = (listId: string, title: string, description: string, tags: string[]) => {
-  return {
-    type: ActionTypes.ADD_TODO,
-    payload: { title, description, listId, tags }
-  };
-};
+export const fetchTodos = (): any => {
+  return async (
+    dispatch: ThunkDispatch<{}, {}, FetchedTodos | ErrorTodos | LoadingTodos>
+  ) => {
+    dispatch({
+      type: ActionTypes.LOADING_TODOS,
+      loading: true
+    });
 
-export const deleteTodo = (id: string, listId: string) => {
-  return {
-    type: ActionTypes.DELETE_TODO,
-    payload: { id, listId }
-  };
-};
-
-export const addTag = (todoId: string, listId: string, text: string) => {
-  return {
-    type: ActionTypes.ADD_TAG,
-    payload: { todoId, listId, text }
-  };
-};
-
-export const deleteTag = (todoId: string, listId: string, text: string) => {
-  return {
-    type: ActionTypes.DELETE_TAG,
-    payload: { todoId, listId, text }
+    //dummy promise
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    fetch(`${getDomain()}/todos`, HTTP_OPTIONS(PROTOCOL_METHOD.GET))
+      .then(res => res.json())
+      .then((todos: Todo[]) => {
+        dispatch({
+          type: ActionTypes.FETCHED_TODOS,
+          loading: false,
+          todos
+        });
+      })
+      .catch((error: string) => {
+        console.log(error);
+        dispatch({
+          type: ActionTypes.ERROR_TODOS,
+          error,
+          loading: false
+        });
+      });
   };
 };

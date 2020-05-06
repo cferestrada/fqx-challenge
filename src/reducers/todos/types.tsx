@@ -1,47 +1,34 @@
+import { Todo } from "../../model/Todo";
+
 export enum ActionTypes {
-  ADD_TODO = 'ADD_TODO',
-  DELETE_TODO = 'DELETE_TODO',
-  ADD_TAG = 'ADD_TAG',
-  DELETE_TAG = 'DELETE_TAG',
+  LOADING_TODOS = "LOADING_TODOS",
+  FETCHED_TODOS = "FETCHED_TODOS",
+  ERROR_TODOS = "ERROR_TODOS"
 }
 
 /**
  * Action Types
  */
-
-export type AddTodo = {
-  type: ActionTypes.ADD_TODO;
-  payload: {
-    id: string,
-    text: string
-    listId: string,
-    tags: string[]
-  }
+export type LoadingTodos = {
+  type: ActionTypes.LOADING_TODOS;
+  loading: boolean;
+};
+export type FetchedTodos = {
+  todos: Todo[];
+  type: ActionTypes.FETCHED_TODOS;
+  loading: boolean;
+};
+export type ErrorTodos = {
+  type: ActionTypes.ERROR_TODOS;
+  error: string;
+  loading: boolean;
 };
 
-export type DeleteTodo = {
-  type: ActionTypes.DELETE_TODO;
-  payload: {
-    id: string,
-    listId: string,
-  }
-};
-
-export type AddTag = {
-  type: ActionTypes.ADD_TAG;
-  payload: {
-    todoId: string,
-    text: string
-    listId: string,
-    tags: string[]
-  }
-};
-
-export type DeleteTag = {
-  type: ActionTypes.DELETE_TAG;
-  payload: {
-    todoId: string,
-    listId: string,
-    text: string,
-  }
+/**
+ * State Type
+ */
+export type TodoState = {
+  todos: Todo[];
+  loading: boolean;
+  error?: string;
 };
