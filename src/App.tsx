@@ -5,6 +5,7 @@ import MyImage, { AssetType } from "./views/Figure";
 import MainRouter from "./routes/MainRouter";
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import GitHubIcon from '@material-ui/icons/GitHub';
 
 const Container = styled.div`
   display: flex;
@@ -71,7 +72,9 @@ const App: React.FC = () => {
       </Container>
       <Footer>
         <Authored>
-          @cferestrada
+          <a href="https://github.com/cferestrada/fqx-challenge/tree/v1" target="_blank">
+            <GitHubIcon />
+          </a>
         </Authored>
       </Footer>
     </ThemeProvider>

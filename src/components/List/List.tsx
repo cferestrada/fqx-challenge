@@ -10,7 +10,7 @@ import { __GRAY_SCALE } from '../../layout/Theme';
 const Container = styled.div`
   background: rgba(255, 255, 255, 0.75);
   borderradius: 3px;
-  width: 100%;
+  width: 95%;
   ${SMALL_DEVICES`
     width: 30%;
   `};
